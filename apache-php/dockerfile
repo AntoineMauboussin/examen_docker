@@ -1,3 +1,5 @@
 FROM tutum/apache-php:latest
 
 LABEL maintenaner="amaubou"
+
+COPY db-data/ /var/www/html/
