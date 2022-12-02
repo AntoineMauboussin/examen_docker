@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: apache-php
+  name: apache-php
+  namespace: amaubou
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apache-php
+  template:
+    metadata:
+      labels:
+        app: apache-php
+    spec:
+      volumes:
+      - name: www-data
+        persistentVolumeClaim:
+          claimName: www-data
+      containers:
+      - name: apache-php
+        image: amaubou/apache-php
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: www-data
+          mountPath: /var/www/html/
